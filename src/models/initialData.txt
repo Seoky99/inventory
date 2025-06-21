@@ -1,0 +1,20 @@
+Combos 
+ Classic Combo: Classic Burger, Fries, Vanilla Shake 
+ Summer Combo: Summer Burger, Curly Fries, Strawberry Shake
+Specials 
+ Combo #1 
+ Summer Burger 
+Burgers 
+ Summer Burger (new)
+ Royal Red Burger 
+ Southwest Burger 
+ Chicken Burger 
+ Classic Burger 
+Fries 
+ Fries 
+ Steak Fries 
+ Curly Fries 
+Shakes 
+ Vanilla Shake 
+ Strawberry Shake 
+ Mint Shake 
