@@ -5,11 +5,11 @@ async function getCategories() {
     return rows; 
 }
 
-async function getItems(category) {
+async function getItemsOnCategory(category) {
 
     category = category.charAt(0).toUpperCase() + category.slice(1);
 
-    const query = `SELECT category.name, item.name AS itemName, item.price 
+    const query = `SELECT category.name AS categoryname, item.name AS itemname, item.price 
     FROM category 
     INNER JOIN category_item ON category_id = category.id 
     INNER JOIN item ON item_id = item.id 
@@ -20,4 +20,12 @@ async function getItems(category) {
     return rows; 
 }
 
-module.exports = { getCategories, getItems };
+async function getItem(item) {
+
+    const query = `SELECT name, price FROM item WHERE name = $1`;
+    
+    const { rows } = await pool.query(query, [item]); 
+    return rows; 
+}
+
+module.exports = { getCategories, getItemsOnCategory, getItem };

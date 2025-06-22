@@ -5,7 +5,7 @@ const getIndex = async (req, res) => {
     const categories = await db.getCategories(); 
     const names = categories.map(category => category.name); 
 
-    res.render("index", {names});
+    res.render("index", {names, items:{}});
 }
 
 const getCategory = async (req, res) => {
@@ -14,10 +14,18 @@ const getCategory = async (req, res) => {
     const names = categories.map(category => category.name); 
 
     const {category} = req.params;
-    const rows = await db.getItems(category);
-    const items = rows.map(row => row.itemname);
+    const rows = await db.getItemsOnCategory(category);
+    const items = rows.map(row => [row.categoryname, row.itemname]);
 
     res.render("index", {names, items})
 }
 
-module.exports = { getIndex, getCategory }; 
+const getItem = async (req, res) => {
+
+    const { item } = req.params; 
+    const [returnedItem] = await db.getItem(item); 
+
+    res.render("itemView", {item: returnedItem})
+}
+
+module.exports = { getIndex, getCategory, getItem }; 

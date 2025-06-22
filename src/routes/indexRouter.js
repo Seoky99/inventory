@@ -3,6 +3,7 @@ const indexController = require("../controllers/indexController");
 
 const indexRouter = Router(); 
 
+indexRouter.get("/:category/:item", indexController.getItem); 
 indexRouter.get("/:category", indexController.getCategory);
 indexRouter.get("/", indexController.getIndex);
 

@@ -9,20 +9,29 @@
 <body>
     <h1>hallo</h1>
     <ul class="categories">
-        <li> <button>ALL</button></li>
+        <li>
+            <button>ALL</button>
+        </li>
     <% names.forEach(name => { %>
         <li>
-            <button><%= name %></button>
+            <button>
+                <a href='/<%=name%>'><%=name%></a>
+            </button>
         </li>
     <% }) %>
+        <li>
+            <button>ADD CATEGORY</button>
+        </li>
     </ul>
     <div>
         <h1> CONTENT 
-            <% items.forEach(item => { %>
+            <% if (Object.keys(items).length !== 0) { items.forEach(item => { %>
             <li>
-                <button><%= item %></button>
+                <button>
+                    <a href='/<%=item[0]%>/<%=item[1]%>'><%= item[1] %></a>
+                </button>
             </li>
-            <% }) %>
+            <% }) } %>
         </h1>
     </div>
 </body>

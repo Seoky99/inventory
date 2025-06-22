@@ -14,7 +14,14 @@ app.use(express.static(assetsPath));
 
 app.use("/", indexRouter);
 
+app.use( (req, res) => {
+    res.status(404).send("404 error");
+});
+
+app.use( (err, req, res, next) => {
+    res.status(500).send("DUMBASS"); 
+});
 
 app.listen(process.env.PORT, () => {
     console.log("Express app running!");
-}) 
+});
