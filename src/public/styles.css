@@ -1,0 +1,16 @@
+body {
+    background-color: coral;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.categories {
+    display: flex;
+ 
+    & li {
+        padding: 10px; 
+        background-color: white;
+    }
+}

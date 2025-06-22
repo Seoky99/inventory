@@ -107,6 +107,11 @@ const query = `
     
     INSERT INTO category_item (category_id, item_id)
     VALUES 
+        ((SELECT category.id FROM category WHERE category.name = 'Specials'),
+        (SELECT item.id FROM item WHERE item.name = 'Summer Burger')),
+        ((SELECT category.id FROM category WHERE category.name = 'Specials'),
+        (SELECT item.id FROM item WHERE item.name = 'Summer Combo')),
+    
         ((SELECT category.id FROM category WHERE category.name = 'Shakes'),
         (SELECT item.id FROM item WHERE item.name = 'Vanilla Shake')),
         ((SELECT category.id FROM category WHERE category.name = 'Shakes'),

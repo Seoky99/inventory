@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>hallo</h1>
+    <ul class="categories">
+        <li> <button>ALL</button></li>
+    <% names.forEach(name => { %>
+        <li>
+            <button><%= name %></button>
+        </li>
+    <% }) %>
+    </ul>
+    <div>
+        <h1> CONTENT 
+            <% items.forEach(item => { %>
+            <li>
+                <button><%= item %></button>
+            </li>
+            <% }) %>
+        </h1>
+    </div>
+</body>
+</html>
