@@ -20,19 +20,27 @@
         </li>
     <% }) %>
         <li>
-            <button>ADD CATEGORY</button>
+            <button>
+                <a href="/add">ADD CATEGORY></a>
+            </button>
         </li>
     </ul>
     <div>
-        <h1> CONTENT 
+        <div> 
+            <h1> CONTENT </h1>
             <% if (Object.keys(items).length !== 0) { items.forEach(item => { %>
             <li>
                 <button>
                     <a href='/<%=item[0]%>/<%=item[1]%>'><%= item[1] %></a>
                 </button>
             </li>
-            <% }) } %>
-        </h1>
+            <% })} %>
+            <% if (locals.category) { %>
+            <button>
+                <a href ='/<%=category%>/add'>Add an item!</a>
+            </button> 
+            <% } %>
+        </div>
     </div>
 </body>
 </html>

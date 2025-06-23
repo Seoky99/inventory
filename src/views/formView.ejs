@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hullo</h1>
+
+    <% if (locals.errors) {%>
+    <ul>
+        <% errors.forEach(function(error) { %>
+        <li><%= error.msg %></li>
+        <% }); %>
+    </ul>
+    <% } %>
+
+    <% if (!locals.category || !locals.itemnames) { %> 
+        <form action="/add" method="POST">
+            <label for="category">Add a new category here:</label>
+            <input type="text" name="category" id="category" required></input>
+            <button type="submit">Submit me!</button>
+        </form>
+    <% } else { %>
+
+        <p>Category: <%= category %></p>
+        <form action="/<%= category %>/add" method="POST">
+            <label for="itemname">Add a new item here:</label>
+            <input type="text" name="itemname" id="itemname" required></input>
+
+            <label for="price">Price of item:</label>
+            <input type="number" name="price" id="price" required></input> 
+
+            <button type="submit">Submit me!</button>
+        </form>
+
+        <form action="/<%= category %>/update" method="POST">
+            <label for="updatedItem"></label>
+            <select name="updatedItem" id="updatedItem">
+                <% itemnames.forEach(itemname => { %>
+                <option value="<%=itemname%>"><%= itemname %></option>
+                <% }); %>
+            </select>
+            <button type="submit">Submit here!</button>
+        </form>
+    <% }%>    
+</body>
+</html>
