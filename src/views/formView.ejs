@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <h1>Hullo</h1>
@@ -24,26 +25,28 @@
         </form>
     <% } else { %>
 
-        <p>Category: <%= category %></p>
-        <form action="/<%= category %>/add" method="POST">
-            <label for="itemname">Add a new item here:</label>
-            <input type="text" name="itemname" id="itemname" required></input>
+        <div class="form-div">
+            <p>Category: <%= category %></p>
+            <form action="/<%= category %>/add" method="POST">
+                <label for="itemname">Add a new item here:</label>
+                <input type="text" name="itemname" id="itemname" required></input>
 
-            <label for="price">Price of item:</label>
-            <input type="number" name="price" id="price" required></input> 
+                <label for="price">Price of item:</label>
+                <input type="number" name="price" id="price" required></input> 
 
-            <button type="submit">Submit me!</button>
-        </form>
+                <button type="submit">Submit me!</button>
+            </form>
 
-        <form action="/<%= category %>/update" method="POST">
-            <label for="updatedItem"></label>
-            <select name="updatedItem" id="updatedItem">
-                <% itemnames.forEach(itemname => { %>
-                <option value="<%=itemname%>"><%= itemname %></option>
-                <% }); %>
-            </select>
-            <button type="submit">Submit here!</button>
-        </form>
+            <form action="/<%= category %>/update" method="POST">
+                <label for="updatedItem"></label>
+                <select name="updatedItem" id="updatedItem">
+                    <% itemnames.forEach(itemname => { %>
+                    <option value="<%=itemname%>"><%= itemname %></option>
+                    <% }); %>
+                </select>
+                <button type="submit">Submit here!</button>
+            </form>
+        </div>
     <% }%>    
 </body>
 </html>

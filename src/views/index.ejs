@@ -4,43 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1>hallo</h1>
-    <ul class="categories">
-        <li>
-            <button>ALL</button>
-        </li>
-    <% names.forEach(name => { %>
-        <li>
-            <button>
-                <a href='/<%=name%>'><%=name%></a>
-            </button>
-        </li>
-    <% }) %>
-        <li>
-            <button>
-                <a href="/add">ADD CATEGORY></a>
-            </button>
-        </li>
-    </ul>
-    <div>
-        <div> 
-            <h1> CONTENT </h1>
+    <%- include('./components/nav', {names: names}) %>
+    <div class="content-box">
+        <div class="item-box">
             <% if (Object.keys(items).length !== 0) { items.forEach(item => { %>
-            <li>
-                <button>
-                    <a href='/<%=item[0]%>/<%=item[1]%>'><%= item[1] %></a>
-                </button>
-            </li>
+                <div class="item"> 
+                    <a href='/<%=item[0]%>/<%=item[1]%>'>
+                        <%= item[1] %>
+                    </a>
+                    <form action="/<%=item[0]%>/<%=item[1]%>/del" method="POST">
+                        <button type="submit">DELETE</button>
+                    </form>
+                </div>
             <% })} %>
-            <% if (locals.category) { %>
-            <button>
-                <a href ='/<%=category%>/add'>Add an item!</a>
-            </button> 
-            <% } %>
         </div>
+        <% if (locals.category) { %>
+        <a href ='/<%=category%>/add'>
+            Add an item!
+        </a> 
+        <% } %>
     </div>
 </body>
 </html>

@@ -15,6 +15,13 @@ const getCategory = async (req, res) => {
     const names = categories.map(category => category.name); 
 
     const {category} = req.params;
+
+    if (category === 'all') {
+        const rows = await db.getItems(true); 
+        const items = rows.map(row => [row.categoryname, row.itemname]);
+        return res.render("index", {names, items, category});
+    }
+
     const rows = await db.getItemsOnCategory(category);
     const items = rows.map(row => [row.categoryname, row.itemname]);
 
@@ -22,7 +29,6 @@ const getCategory = async (req, res) => {
 }
 
 const getItem = async (req, res) => {
-
     const { item } = req.params; 
     const [returnedItem] = await db.getItem(item); 
 
@@ -42,19 +48,26 @@ const addItemPost = [
     body("itemname").notEmpty().withMessage("Empty")
         .trim()
         .isAlpha('en-US', {ignore: ' '}).withMessage("Included non-alpha characters")
-        .isLength({min: 3, max: 15}).withMessage("Length is not correct"),
+        .isLength({min: 3, max: 15}).withMessage("Length is not correct")
+        .custom(async (value, { req }) => {
+            if (await db.itemExists(value)) {
+            throw new Error('Item exists already');
+            }
+        }),
 
     async (req, res) => {
         const { category } = req.params; 
 
         const result = validationResult(req);
 
+        const rows = await db.getItemsExceptCategory(category); 
+        const itemnames = rows.map(row => row.itemname);
+
         if (!result.isEmpty()) {
-            return res.status(400).render("formView", {errors: result.errors});
+            return res.status(400).render("formView", {category, itemnames, errors: result.errors});
         }
 
         const {itemname, price} = req.body; 
-
         await db.addItem({itemname, price}, category);
 
         res.redirect(`../${category}`);
@@ -70,4 +83,11 @@ async function updateItem(req, res) {
     res.redirect(`../${category}`);
 }
 
-module.exports = { getIndex, getCategory, getItem, addItemGet, addItemPost, updateItem }; 
+async function deleteItem(req, res) {
+
+    const { category, item } = req.params; 
+    await db.deleteCategoryItem(category, item); 
+    res.redirect(`/${category}`);
+}
+
+module.exports = { getIndex, getCategory, getItem, addItemGet, addItemPost, updateItem, deleteItem }; 

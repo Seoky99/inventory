@@ -1,0 +1,17 @@
+<ul class="categories">
+    <li>
+        <a href="/all">ALL</a>
+    </li>
+    <% names.forEach(name => { %>
+        <li>
+            <a href='/<%=name%>'>
+                <%=name%>
+            </a>
+        </li>
+    <% }) %>
+    <li>
+        <a href="/add">
+            ADD CATEGORY
+        </a>
+    </li>
+</ul>
